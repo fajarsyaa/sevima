@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard.main');
+    return view('welcome');
 });
+
 Route::get('/r', function () {
     return view('dashboard.rankPilihJurusan');
 });
@@ -24,3 +26,6 @@ Route::get('/r', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// users
+Route::resource('/user/profile', UsersController::class);
