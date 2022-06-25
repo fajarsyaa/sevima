@@ -17,7 +17,7 @@ class CreateAbsensisTable extends Migration
             $table->id();
             $table->integer('id_siswa');
             $table->date('tanggal');
-            $table->time('id_jam');
+            $table->integer('id_jam');
             $table->string('ket');
             $table->string('foto')->nullable();
             $table->timestamps();

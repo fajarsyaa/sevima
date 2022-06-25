@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -13,6 +14,10 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         //
@@ -25,7 +30,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.user.add');
     }
 
     /**
@@ -36,7 +41,42 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $val = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'nip' => 'required|numeric',
+            'phone' => 'required|numeric',
+            'alamat' => 'required',
+            'foto' => 'mimes:jpg,jpeg,png,bmp|max:2000',
+        ], [
+            'required' => ':attribute harus di isi agar tidak muncul miss komunikasi',
+            'mimes' => ':attribute hanya menerima file jpg,jpng,png,bmp',
+            'max' => ':attribute melebihi batas'
+        ]);
+
+
+
+        if (isset($request->foto)) {
+            $file = $request->foto;
+            $gambar = $file->getClientOriginalName();
+            $file->move(public_path('assets/img/fotoProfile'), $gambar);
+        } else {
+            $gambar = $request->fotoLama;
+        }
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'nip' => $request->nip,
+            'alamat' => $request->alamat,
+            'foto' => $gambar,
+            'level' => 'guru'
+        ]);
+
+        return redirect()->back()->with('message', 'Berhasil');
     }
 
     /**

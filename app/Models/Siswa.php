@@ -13,11 +13,16 @@ class Siswa extends Model
 
     function absen()
     {
-        return $this->hasMany(Absensi::class, 'id_siswa', 'absen');
+        return $this->hasMany(Absensi::class, 'id_siswa', 'id');
     }
 
     function jurusan()
     {
-        return $this->hasMany(Jurusan::class, 'id', 'jurusan');
+        return $this->hasOne(Jurusan::class, 'id', 'jurusan');
+    }
+
+    function kelas()
+    {
+        return $this->hasOne(kelas::class, 'id', 'kelas');
     }
 }

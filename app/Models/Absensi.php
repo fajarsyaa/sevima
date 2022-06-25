@@ -15,4 +15,9 @@ class Absensi extends Model
     {
         return $this->hasOne(Jam::class, 'id_jam', 'id');
     }
+
+    function siswa()
+    {
+        return $this->hasOne(Siswa::class, 'id', 'id_siswa');
+    }
 }

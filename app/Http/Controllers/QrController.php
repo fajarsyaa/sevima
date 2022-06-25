@@ -14,9 +14,14 @@ class QrController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $data = Siswa::where('name', Auth::user()->name)->first();
+        $data = Siswa::where('id', Auth::user()->id_siswa)->first();
         $qr = $data->id;
         return  view('dashboard.absen.qr', compact('qr'));
     }

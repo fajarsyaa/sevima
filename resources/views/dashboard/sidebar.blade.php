@@ -3,61 +3,88 @@
      <ul class="sidebar-nav" id="sidebar-nav">
 
          <li class="nav-item">
-             <a class="nav-link " href="{{ route('dashboard') }}">
+             <a class="nav-link " href="{{ route('home') }}">
                  <i class="bi bi-grid"></i>
                  <span>Dashboard</span>
              </a>
          </li><!-- End Dashboard Nav -->
-         <li class="nav-item">
-             <a class="nav-link collapsed" data-bs-target="#components-nav3" data-bs-toggle="collapse" href="#">
-                 <i class="bi bi-book-fill"></i></i><span>Data Siswa</span><i class="bi bi-chevron-down ms-auto"></i>
-             </a>
-             <ul id="components-nav3" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                 <li>
-                     <a href="{{ route('perkelas') }}">
-                         <i class="bi bi-circle"></i><span>Absensi Perkelas</span>
-                     </a>
-                 </li>
-             </ul>
-         </li>
 
-         <li class="nav-item">
-             <a class="nav-link " href="{{ route('jurusan.index') }}">
-                 <i class="bi bi-grid"></i>
-                 <span>Jurusan</span>
-             </a>
-         </li><!-- End Dashboard Nav -->
-         <li class="nav-item">
-             <a class="nav-link " href="{{ route('kelas.index') }}">
-                 <i class="bi bi-grid"></i>
-                 <span>Kelas</span>
-             </a>
-         </li><!-- End Dashboard Nav -->
-         <li class="nav-item">
-             <a class="nav-link " href="{{ route('scan') }}">
-                 <i class="bi bi-grid"></i>
-                 <span>SCAN</span>
-             </a>
-         </li><!-- End Dashboard Nav -->
-         <li class="nav-item">
-             <a class="nav-link collapsed" data-bs-target="#components-nav4" data-bs-toggle="collapse" href="#">
-                 <i class="bi bi-book-fill"></i></i><span>Absen</span><i class="bi bi-chevron-down ms-auto"></i>
-             </a>
-             <ul id="components-nav4" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                 <li>
-                     <a href="{{ route('qr.index') }}">
-                         <i class="bi bi-circle"></i><span>Absen</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="{{ route('absen.index') }}">
-                         <i class="bi bi-circle"></i><span>izin</span>
-                     </a>
-                 </li>
-             </ul>
-         </li>
-         {{-- @if (Auth::user()->level == 'siswa')
+         @if (Auth::user()->level == 'guru')
              <li class="nav-item">
+                 <a class="nav-link collapsed" data-bs-target="#components-nav3" data-bs-toggle="collapse"
+                     href="#">
+                     <i class="bi bi-book-fill"></i></i><span>Data Siswa</span><i
+                         class="bi bi-chevron-down ms-auto"></i>
+                 </a>
+                 <ul id="components-nav3" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                     <li>
+                         <a href="{{ route('perkelas') }}">
+                             <i class="bi bi-circle"></i><span>Absensi Perkelas</span>
+                         </a>
+                     </li>
+                 </ul>
+                 <ul id="components-nav3" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                     <li>
+                         <a href="{{ route('siswa.create') }}">
+                             <i class="bi bi-circle"></i><span>Input Siswa</span>
+                         </a>
+                     </li>
+                 </ul>
+             </li>
+
+             <li class="nav-item">
+                 <a class="nav-link " href="{{ route('jurusan.index') }}">
+                     <i class="bi bi-grid"></i>
+                     <span>Jurusan</span>
+                 </a>
+             </li><!-- End Dashboard Nav -->
+             <li class="nav-item">
+                 <a class="nav-link " href="{{ route('kelas.index') }}">
+                     <i class="bi bi-grid"></i>
+                     <span>Kelas</span>
+                 </a>
+             </li><!-- End Dashboard Nav -->
+             <li class="nav-item">
+                 <a class="nav-link " href="{{ route('scan') }}">
+                     <i class="bi bi-grid"></i>
+                     <span>SCAN</span>
+                 </a>
+             </li><!-- End Dashboard Nav -->
+             <li class="nav-item">
+                 <a class="nav-link " href="{{ route('user.create') }}">
+                     <i class="bi bi-grid"></i>
+                     <span>Tambah Guru</span>
+                 </a>
+             </li><!-- End Dashboard Nav -->
+         @endif
+
+
+         @if (Auth::user()->level == 'siswa')
+             <li class="nav-item">
+                 <a class="nav-link collapsed" data-bs-target="#components-nav4" data-bs-toggle="collapse"
+                     href="#">
+                     <i class="bi bi-book-fill"></i></i><span>Absen</span><i class="bi bi-chevron-down ms-auto"></i>
+                 </a>
+                 <ul id="components-nav4" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                     <li>
+                         <a href="{{ route('qr.index') }}">
+                             <i class="bi bi-circle"></i><span>Absen</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="{{ route('absen.index') }}">
+                             <i class="bi bi-circle"></i><span>izin</span>
+                         </a>
+                     </li>
+                 </ul>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link " href="{{ route('perkelas') }}">
+                     <i class="bi bi-grid"></i>
+                     <span>Daftar hadir</span>
+                 </a>
+             </li>
+             {{-- <li class="nav-item">
                  <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
                      href="#">
                      <i class="bi bi-book-fill"></i></i><span>Siswa</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -74,10 +101,19 @@
                          </a>
                      </li>
                  </ul>
-             </li><!-- End Components Nav -->
+             </li><!-- End Components Nav --> --}}
          @endif
 
-         <li class="nav-item">
+         @if (Auth::user()->level == 'anonymus')
+             <li class="nav-item">
+                 <a class="nav-link " href="{{ route('perkelas') }}">
+                     <i class="bi bi-grid"></i>
+                     <span>Daftar hadir</span>
+                 </a>
+             </li>
+         @endif
+
+         {{-- <li class="nav-item">
              <a class="nav-link collapsed" data-bs-target="#components-nav2" data-bs-toggle="collapse" href="#">
                  <i class="bi bi-trophy-fill"></i></i><span>Ranking</span><i class="bi bi-chevron-down ms-auto"></i>
              </a>

@@ -29,9 +29,6 @@ Route::get('/scan', function () {
     return view('dashboard.absen.scan');
 })->name('scan');
 
-Route::get('/dasboard', function () {
-    return view('dashboard.main');
-})->name('dashboard');
 
 Auth::routes();
 // Route::post('/logout/user', [LoginController::class, 'logout'])->name('lgt');
@@ -39,9 +36,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/edit/absen', [App\Http\Controllers\AbsenController::class, 'edit']);
 Route::get('/edit/absen/perkelas', [App\Http\Controllers\AbsenController::class, 'perkelas'])->name('perkelas');
+Route::get('/user/serach', [App\Http\Controllers\UsersController::class, 'search'])->name('search');
+
 
 // users
 Route::resource('/user/profile', UsersController::class);
+Route::resource('/user', UsersController::class);
 Route::resource('/user/tugas', TugasController::class);
 Route::resource('/jurusan', JurusanController::class);
 Route::resource('/kelas', KelasController::class);

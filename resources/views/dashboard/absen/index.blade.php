@@ -7,6 +7,15 @@
             </div>
         @endif
     </div>
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <h3>jika izin isi form</h3>
     <form action="{{ route('absen.update', $data->id) }}" method="POST" enctype="multipart/form-data">
         @csrf

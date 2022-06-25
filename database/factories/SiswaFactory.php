@@ -26,8 +26,7 @@ class SiswaFactory extends Factory
             'jurusan' => rand(1, 3),
             'alamat' => "klgr",
             'kelas' => rand(1, 3),
-            'absen' => $this->faker->unique()->numberBetween(1, 50),
-            'nis' => "123456789"
+            'nis' => $this->faker->unique()->numberBetween(100000, 90000000)
 
         ];
     }

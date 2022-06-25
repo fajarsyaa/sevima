@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Jurusan;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class SiswaController extends Controller
 {
@@ -14,9 +17,13 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
-        Kelas::all();
+        $kelas = Kelas::all();
         return view('dashboard.siswa.index', compact('kelas'));
     }
 
@@ -27,7 +34,8 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+        $jur = Jurusan::all();
+        return view('dashboard.siswa.add', compact('jur'));
     }
 
     /**
@@ -38,6 +46,43 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+        $val = $request->validate([
+            'name' => 'required',
+            'nis' => 'required|numeric',
+            'phone' => 'required|numeric',
+            'alamat' => 'required',
+        ], [
+            'required' => ':attribute harus di isi agar tidak muncul miss komunikasi',
+            'numeric' => ':attribute harus angka'
+        ]);
+
+        $Siswa = Siswa::create([
+            'name' => $request->name,
+            'agama' => $request->agama,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'tahun_masuk' => date('Y-m-d'),
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'phone' => $request->phone,
+            'jurusan' => $request->jurusan,
+            'alamat' => $request->alamat,
+            'kelas' => 1,
+            'nis' => $request->nis
+        ]);
+
+        $dt = Siswa::where('id', $Siswa->id)->first();
+        $dw = Jurusan::where('kode_jurusan', $dt->jurusan)->first();
+        User::create([
+            'name' => $request->name,
+            'email' => 'mistermaqin'. rand(1,1000) . "@gmail.com",
+            'password' => Hash::make($request->nama),
+            'level' => 'siswa',
+            'id_siswa' => $Siswa->id,
+            'id_kelas' => $dt->kelas,
+            'id_jurusan' => $dw->id
+        ]);
+
+        return redirect()->back()->with('message', 'berhasil');
     }
 
     /**
@@ -85,5 +130,13 @@ class SiswaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $siswa = Siswa::where('pegawai_nama', 'like', "%" . $request->search . "%")
+            ->paginate(10);
+
+        return redirect()->back();
     }
 }

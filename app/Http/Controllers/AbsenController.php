@@ -17,9 +17,14 @@ class AbsenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
-        $data = Siswa::where('name', Auth::user()->name)->first();
+        $data = Siswa::where('id', Auth::user()->id_siswa)->first();
         return view('dashboard.absen.index', compact('data'));
     }
 
@@ -60,9 +65,9 @@ class AbsenController extends Controller
      */
     public function show($id)
     {
-        $data = Siswa::where('kelas', $id)->get();
-        $data = collect($data)->groupBy('jurusan');
-        return view('dashboard.dataAbsen.perkelas', compact('data'));
+        $data = Jurusan::all();
+        $kls = Kelas::where('id', $id)->first();
+        return view('dashboard.dataAbsen.perkelas', compact('data', 'kls'));
     }
 
     /**
@@ -73,6 +78,9 @@ class AbsenController extends Controller
      */
     public function edit($id)
     {
+        $data = Siswa::where('jurusan', 1)->where('kelas', 3)->get();
+
+        return view('dashboard.dataAbsen.data', compact('data'));
     }
 
     /**
@@ -84,6 +92,14 @@ class AbsenController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'foto' => 'required|max:2000|mimes:png,jpg'
+        ], [
+            'required' => ':attribute harus di isi agar tidak muncul miss komunikasi',
+            'mimes' => ':attribute hanya menerima file jpg,jpng,png,bmp',
+            'max' => ':attribute max 2 mb'
+        ]);
+
         $file = $request->foto;
         $gambar = $file->getClientOriginalName();
         $file->move(public_path('assets/img/Sk'), $gambar);

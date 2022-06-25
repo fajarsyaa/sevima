@@ -17,13 +17,13 @@ class UserFactory extends Factory
     {
 
         return [
-            'name' => 'fajar',
-            'email' => 'fajar@gmail.com',
-            'password' => Hash::make('fajar123'),
+            'name' => 'user' . rand(1, 100),
+            'email' => 'user' . rand(1, 100) . '@gmail.com',
+            'password' => Hash::make('user123'),
             'level' => "siswa",
             'id_kelas' => 1,
             'id_jurusan' => 1,
-            'absen' => 1
+            'id_siswa' => 1,
         ];
     }
 
