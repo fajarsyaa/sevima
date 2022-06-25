@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AbsenController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\TugasController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,13 +24,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/r', function () {
-    return view('dashboard.rankPilihJurusan');
-});
+Route::get('/dasboard', function () {
+    return view('dashboard.main');
+})->name('dashboard');
 
 Auth::routes();
+// Route::post('/logout/user', [LoginController::class, 'logout'])->name('lgt');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // users
 Route::resource('/user/profile', UsersController::class);
+Route::resource('/user/tugas', TugasController::class);
+Route::resource('/jurusan', JurusanController::class);
+Route::resource('/kelas', KelasController::class);
+Route::resource('/siswa', SiswaController::class);
+Route::resource('/absen', AbsenController::class);

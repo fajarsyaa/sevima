@@ -48,7 +48,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $dataUser = Auth::user();
-        return view('dashboard.profile', compact('dataUser'));
+        return view('dashboard.profil.profile', compact('dataUser'));
     }
 
     /**
@@ -85,15 +85,22 @@ class UsersController extends Controller
         //     'mimes' => ':attribute hanya menerima file jpg,jpng,png,bmp'
         // ]);
 
-        $file = $request->foto;
-        $gambar = $file->getClientOriginalName();
-        $file->move(public_path('assets/img/fotoProfile'), $gambar);
+
+
+        if (isset($request->foto)) {
+            $file = $request->foto;
+            $gambar = $file->getClientOriginalName();
+            $file->move(public_path('assets/img/fotoProfile'), $gambar);
+        } else {
+            $gambar = $request->fotoLama;
+        }
 
         User::where('id', $id)->update([
-            'name' => $request->nama,
+            'name' => $request->name,
             'email' => $request->email,
-            'absen' => $request->absen,
             'foto' => $gambar,
+            'phone' => $request->phone,
+            'alamat' => $request->alamat
         ]);
 
         return redirect(route('profile.show', $id))->with('message', 'Data berhasil di update');

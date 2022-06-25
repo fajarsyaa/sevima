@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->integer('absen');
             $table->integer('id_kelas');
             $table->integer('id_jurusan');
+            $table->bigInteger('phone')->nullable();
+            $table->string('alamat')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -1,282 +1,172 @@
- <!DOCTYPE html>
- <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
- <head>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-     <meta charset="utf-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-     <meta name="description" content="">
-     <meta name="author" content="">
+    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-     <title>SB Admin 2 - Dashboard</title>
+    <!-- Favicons -->
+    <link href="{{ asset('dashboard/assets/img/favicon.png') }}" rel="icon">
+    {{-- <link href="{{ asset('dashboard/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon"> --}}
 
-     <!-- Custom fonts for this template-->
-     <link href="{{ asset('dashboard/tambahan') }}/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-     <link
-         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-         rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
-     <!-- Custom styles for this template-->
-     <link href="{{ asset('dashboard/css/sb-admin-2.css') }}" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="{{ asset('dashboard/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashboard/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashboard/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashboard/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashboard/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashboard/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashboard/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
- </head>
+    <!-- Template Main CSS File -->
+    <link href="{{ asset('dashboard/assets/css/style.css') }}" rel="stylesheet">
 
- <body id="page-top">
+    <!-- =======================================================
+  * Template Name: NiceAdmin - v2.2.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
 
-     <!-- Page Wrapper -->
-     <div id="wrapper">
+<body>
 
-         <!-- Sidebar -->
-         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
 
-             <!-- Sidebar - Brand -->
-             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                 <div class="sidebar-brand-icon rotate-n-15">
-                     <i class="fas fa-laugh-wink"></i>
-                 </div>
-                 <div class="sidebar-brand-text mx-3">welcome</div>
-             </a>
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="{{ asset('dashboard/assets/img/logo.png') }}" alt="">
+                <span class="d-none d-lg-block">SMK DLANGGU</span>
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
 
-             <!-- Divider -->
-             <hr class="sidebar-divider my-0">
+        {{-- <div class="search-bar">
+            <form class="search-form d-flex align-items-center" method="POST" action="#">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
+        </div><!-- End Search Bar --> --}}
 
-             <!-- Nav Item - Dashboard -->
-             <li class="nav-item active">
-                 <a class="nav-link" href="index.html">
-                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                     <span>Dashboard</span></a>
-             </li>
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
 
-             <!-- Divider -->
-             <hr class="sidebar-divider">
-
-             <!-- Heading -->
-             <div class="sidebar-heading">
-                 User
-             </div>
-
-             <!-- Nav Item - Pages Collapse Menu -->
-             <li class="nav-item">
-                 <a class="nav-link" href="{{ route('profile.show', Auth::user()->id) }}">
-                     <i class="fas fa-fw fa-address-card"></i>
-                     <span>Profile</span></a>
-             </li>
-
-             <!-- Nav Item - Utilities Collapse Menu -->
-             <li class="nav-item">
-                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                     aria-expanded="true" aria-controls="collapseUtilities">
-                     <i class="fas fa-fw fa-wrench"></i>
-                     <span>Utilities</span>
-                 </a>
-                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                     data-parent="#accordionSidebar">
-                     <div class="bg-white py-2 collapse-inner rounded">
-                         <h6 class="collapse-header">Custom Utilities:</h6>
-                         <a class="collapse-item" href="utilities-color.html">Colors</a>
-                         <a class="collapse-item" href="utilities-border.html">Borders</a>
-                         <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                         <a class="collapse-item" href="utilities-other.html">Other</a>
-                     </div>
-                 </div>
-             </li>
-
-             <!-- Divider -->
-             <hr class="sidebar-divider">
-
-             <!-- Heading -->
-             <div class="sidebar-heading">
-                 RANKING
-             </div>
-
-             <!-- Nav Item - Pages Collapse Menu -->
-             <li class="nav-item">
-                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                     aria-expanded="true" aria-controls="collapsePages">
-                     <i class="fas fa-fw fa-folder"></i>
-                     <span>Ranking siswa</span>
-                 </a>
-                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
-                     data-parent="#accordionSidebar">
-                     <div class="bg-white py-2 collapse-inner rounded">
-                         <h6 class="collapse-header">Kelas :</h6>
-                         <a class="collapse-item" href="login.html">10</a>
-                         <a class="collapse-item" href="login.html">11</a>
-                         <a class="collapse-item" href="login.html">12</a>
-                     </div>
-                 </div>
-             </li>
-
-             <!-- Divider -->
-             <hr class="sidebar-divider d-none d-md-block">
-
-         </ul>
-         <!-- End of Sidebar -->
-
-         <!-- Content Wrapper -->
-         <div id="content-wrapper" class="d-flex flex-column">
-
-             <!-- Main Content -->
-             <div id="content">
-
-                 <!-- Topbar -->
-                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                     <!-- Sidebar Toggle (Topbar) -->
-                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                         <i class="fa fa-bars"></i>
-                     </button>
-
-                     <!-- Topbar Search -->
-                     <form
-                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                         <div class="input-group">
-                             <input type="text" class="form-control bg-light border-0 small"
-                                 placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                             <div class="input-group-append">
-                                 <button class="btn btn-primary" type="button">
-                                     <i class="fas fa-search fa-sm"></i>
-                                 </button>
-                             </div>
-                         </div>
-                     </form>
-
-                     <!-- Topbar Navbar -->
-                     <ul class="navbar-nav ml-auto">
-
-                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                         <li class="nav-item dropdown no-arrow d-sm-none">
-                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                 <i class="fas fa-search fa-fw"></i>
-                             </a>
-                             <!-- Dropdown - Messages -->
-                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                 aria-labelledby="searchDropdown">
-                                 <form class="form-inline mr-auto w-100 navbar-search">
-                                     <div class="input-group">
-                                         <input type="text" class="form-control bg-light border-0 small"
-                                             placeholder="Search for..." aria-label="Search"
-                                             aria-describedby="basic-addon2">
-                                         <div class="input-group-append">
-                                             <button class="btn btn-primary" type="button">
-                                                 <i class="fas fa-search fa-sm"></i>
-                                             </button>
-                                         </div>
-                                     </div>
-                                 </form>
-                             </div>
-                         </li>
+                <li class="nav-item d-block d-lg-none">
+                    <a class="nav-link nav-icon search-bar-toggle " href="#">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li><!-- End Search Icon-->
 
 
+                <li class="nav-item dropdown pe-3">
 
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
+                        data-bs-toggle="dropdown">
+                        <img src="{{ asset('assets/img/fotoProfile/' . Auth::user()->foto) }}" alt="Profile"
+                            class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
+                    </a><!-- End Profile Iamge Icon -->
 
-                         <div class="topbar-divider d-none d-sm-block"></div>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6>{{ Auth::user()->name }}</h6>
+                            <span>{{ Auth::user()->level }}</span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
 
-                         <!-- Nav Item - User Information -->
-                         <li class="nav-item dropdown no-arrow">
-                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                 <span
-                                     class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                 <img class="img-profile rounded-circle" src="">
-                             </a>
-                             <!-- Dropdown - User Information -->
-                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                 aria-labelledby="userDropdown">
-                                 <a class="dropdown-item" href="#">
-                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                     Profile
-                                 </a>
-                                 <div class="dropdown-divider"></div>
-                                 <a class="dropdown-item" href="#" data-toggle="modal"
-                                     data-target="#logoutModal">
-                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                     Logout
-                                 </a>
-                             </div>
-                         </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center"
+                                href="{{ route('profile.show', Auth::user()->id) }}">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
 
-                     </ul>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                <i class="bi bi-box-arrow-in-left"></i>
+                                {{ __('Logout') }}
+                            </a>
 
-                 </nav>
-                 <!-- End of Topbar -->
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
 
-                 <!-- Begin Page Content -->
-                 <div class="container-fluid">
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
 
-                     <!-- Page Heading -->
-                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                     </div>
+            </ul>
+        </nav><!-- End Icons Navigation -->
 
-                     @yield('content')
+    </header><!-- End Header -->
 
-                 </div>
-                 <!-- /.container-fluid -->
+    <!-- ======= Sidebar ======= -->
+    @include('dashboard.sidebar')
 
-             </div>
-             <!-- End of Main Content -->
+    <main id="main" class="main">
 
-             <!-- Footer -->
-             <footer class="sticky-footer bg-white">
-                 <div class="container my-auto">
-                     <div class="copyright text-center my-auto">
-                         <span>JARS</span>
-                     </div>
-                 </div>
-             </footer>
-             <!-- End of Footer -->
+        <div class="pagetitle">
 
-         </div>
-         <!-- End of Content Wrapper -->
+        </div><!-- End Page Title -->
 
-     </div>
-     <!-- End of Page Wrapper -->
+        <section class="section dashboard">
+            <div class="row">
 
-     <!-- Scroll to Top Button-->
-     <a class="scroll-to-top rounded" href="#page-top">
-         <i class="fas fa-angle-up"></i>
-     </a>
+                @yield('content')
 
-     <!-- Logout Modal-->
-     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-         <div class="modal-dialog" role="document">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">×</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                 <div class="modal-footer">
-                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                     <a class="btn btn-primary" href="login.html">Logout</a>
-                 </div>
-             </div>
-         </div>
-     </div>
+            </div>
+        </section>
 
-     <!-- Bootstrap core JavaScript-->
-     <script src="{{ asset('dashboard/tambahan') }}/jquery/jquery.min.js"></script>
-     <script src="{{ asset('dashboard/tambahan') }}/bootstrap/js/bootstrap.bundle.min.js"></script>
+    </main><!-- End #main -->
 
-     <!-- Core plugin JavaScript-->
-     <script src="{{ asset('dashboard/tambahan') }}/jquery-easing/jquery.easing.min.js"></script>
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            Bismillah lolos SEVIMA
+        </div>
+        <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+        </div>
+    </footer><!-- End Footer -->
 
-     <!-- Custom scripts for all pages-->
-     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
-     <!-- Page level plugins -->
-     <script src="{{ asset('dashboard/tambahan') }}/chart.js/Chart.min.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="{{ asset('dashboard/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/vendor/chart.js/chart.min.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/vendor/echarts/echarts.min.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/vendor/quill/quill.min.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/vendor/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/vendor/php-email-form/validate.js') }}"></script>
 
-     <!-- Page level custom scripts -->
-     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
-     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
+    <!-- Template Main JS File -->
+    <script src="{{ asset('dashboard/assets/js/main.js') }}"></script>
 
- </body>
+</body>
 
- </html>
+</html>
