@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Absensi;
 use App\Models\Jam;
+use App\Models\Jurusan;
+use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +60,8 @@ class AbsenController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Siswa::where('kelas', $id)->get();
+        return view('dashboard.dataAbsen.perkelas', compact('data'));
     }
 
     /**
@@ -114,5 +117,11 @@ class AbsenController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    function perkelas()
+    {
+        $data = Kelas::all();
+        return view('dashboard.dataAbsen.index', compact('data'));
     }
 }

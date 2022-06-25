@@ -38,6 +38,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/edit/absen', [App\Http\Controllers\AbsenController::class, 'edit']);
+Route::get('/edit/absen/perkelas', [App\Http\Controllers\AbsenController::class, 'perkelas'])->name('perkelas');
 
 // users
 Route::resource('/user/profile', UsersController::class);

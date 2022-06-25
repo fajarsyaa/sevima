@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Js;
 
 class Siswa extends Model
 {
@@ -13,5 +14,10 @@ class Siswa extends Model
     function absen()
     {
         return $this->hasMany(Absensi::class, 'id_siswa', 'absen');
+    }
+
+    function jurusan()
+    {
+        return $this->hasMany(Jurusan::class, 'id', 'jurusan');
     }
 }

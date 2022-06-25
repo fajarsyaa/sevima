@@ -15,7 +15,7 @@
              </a>
              <ul id="components-nav3" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                  <li>
-                     <a href="">
+                     <a href="{{ route('perkelas') }}">
                          <i class="bi bi-circle"></i><span>Absensi Perkelas</span>
                      </a>
                  </li>
@@ -57,8 +57,7 @@
                  </li>
              </ul>
          </li>
-
-         @if (Auth::user()->level == 'siswa')
+         {{-- @if (Auth::user()->level == 'siswa')
              <li class="nav-item">
                  <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
                      href="#">
@@ -100,7 +99,7 @@
                      </a>
                  </li>
              </ul>
-         </li><!-- End Components Nav -->
+         </li><!-- End Components Nav --> --}}
 
 
          <li class="nav-heading">account</li>
