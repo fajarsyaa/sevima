@@ -16,17 +16,17 @@ class SiswaFactory extends Factory
     {
 
         return [
-            'name' => "fajar syaihu",
+            'name' => $this->faker->unique()->name(),
             'agama' => "islam",
             'tempat_lahir' => "mjk",
             'tanggal_lahir' => "2003-09-09",
             'tahun_masuk' => "2003-09-09",
             'jenis_kelamin' => "lk",
             'phone' => "23456789",
-            'jurusan' => "RPL",
+            'jurusan' => rand(1, 3),
             'alamat' => "klgr",
-            'kelas' => "1",
-            'absen' => "1",
+            'kelas' => rand(1, 3),
+            'absen' => $this->faker->unique()->numberBetween(1, 50),
             'nis' => "123456789"
 
         ];

@@ -24,9 +24,9 @@ class CreateSiswasTable extends Migration
             $table->bigInteger('phone');
             $table->string('jurusan');
             $table->string('alamat');
-            $table->string('kelas');
+            $table->integer('kelas');
             $table->integer('absen');
-            $table->integer('nis');
+            $table->integer('nis')->unique();
 
             $table->timestamps();
         });

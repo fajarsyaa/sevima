@@ -61,6 +61,7 @@ class AbsenController extends Controller
     public function show($id)
     {
         $data = Siswa::where('kelas', $id)->get();
+        $data = collect($data)->groupBy('jurusan');
         return view('dashboard.dataAbsen.perkelas', compact('data'));
     }
 

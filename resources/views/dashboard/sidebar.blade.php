@@ -10,8 +10,7 @@
          </li><!-- End Dashboard Nav -->
          <li class="nav-item">
              <a class="nav-link collapsed" data-bs-target="#components-nav3" data-bs-toggle="collapse" href="#">
-                 <i class="bi bi-book-fill"></i></i><span>Kelola absesni</span><i
-                     class="bi bi-chevron-down ms-auto"></i>
+                 <i class="bi bi-book-fill"></i></i><span>Data Siswa</span><i class="bi bi-chevron-down ms-auto"></i>
              </a>
              <ul id="components-nav3" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                  <li>
