@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jurusan;
-use App\Models\Kelas;
+use App\Models\QRCode;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class SiswaController extends Controller
+class QrController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,9 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        Kelas::all();
-        return view('dashboard.siswa.index', compact('kelas'));
+        $data = Siswa::where('name', Auth::user()->name)->first();
+        $qr = $data->id;
+        return  view('dashboard.absen.qr', compact('qr'));
     }
 
     /**
@@ -48,9 +49,7 @@ class SiswaController extends Controller
      */
     public function show($id)
     {
-        $dataSiswa = Siswa::where('kelas', $id)->get();
-        $dataJurusan = Jurusan::all();
-        return view('dashboard.siswa.index', compact('dataSiswa', 'dataJurusan'));
+        //
     }
 
     /**

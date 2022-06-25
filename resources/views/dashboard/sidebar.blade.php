@@ -9,11 +9,19 @@
              </a>
          </li><!-- End Dashboard Nav -->
          <li class="nav-item">
-             <a class="nav-link " href="{{ route('siswa.index') }}">
-                 <i class="bi bi-grid"></i>
-                 <span>Siswa data</span>
+             <a class="nav-link collapsed" data-bs-target="#components-nav3" data-bs-toggle="collapse" href="#">
+                 <i class="bi bi-book-fill"></i></i><span>Kelola absesni</span><i
+                     class="bi bi-chevron-down ms-auto"></i>
              </a>
-         </li><!-- End Dashboard Nav -->
+             <ul id="components-nav3" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                 <li>
+                     <a href="">
+                         <i class="bi bi-circle"></i><span>Absensi Perkelas</span>
+                     </a>
+                 </li>
+             </ul>
+         </li>
+
          <li class="nav-item">
              <a class="nav-link " href="{{ route('jurusan.index') }}">
                  <i class="bi bi-grid"></i>
@@ -27,11 +35,28 @@
              </a>
          </li><!-- End Dashboard Nav -->
          <li class="nav-item">
-             <a class="nav-link " href="{{ route('absen.index') }}">
+             <a class="nav-link " href="{{ route('scan') }}">
                  <i class="bi bi-grid"></i>
-                 <span>Absen</span>
+                 <span>SCAN</span>
              </a>
          </li><!-- End Dashboard Nav -->
+         <li class="nav-item">
+             <a class="nav-link collapsed" data-bs-target="#components-nav4" data-bs-toggle="collapse" href="#">
+                 <i class="bi bi-book-fill"></i></i><span>Absen</span><i class="bi bi-chevron-down ms-auto"></i>
+             </a>
+             <ul id="components-nav4" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                 <li>
+                     <a href="{{ route('qr.index') }}">
+                         <i class="bi bi-circle"></i><span>Absen</span>
+                     </a>
+                 </li>
+                 <li>
+                     <a href="{{ route('absen.index') }}">
+                         <i class="bi bi-circle"></i><span>izin</span>
+                     </a>
+                 </li>
+             </ul>
+         </li>
 
          @if (Auth::user()->level == 'siswa')
              <li class="nav-item">

@@ -13,6 +13,5 @@ class SiswaSeeder extends Seeder
      */
     public function run()
     {
-        //
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAbsensisTable extends Migration
+class CreateJamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateAbsensisTable extends Migration
      */
     public function up()
     {
-        Schema::create('absensis', function (Blueprint $table) {
+        Schema::create('jams', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_siswa');
-            $table->date('tanggal');
-            $table->time('id_jam');
-            $table->string('ket');
-            $table->string('foto')->nullable();
+            $table->string('type');
+            $table->time('mulai');
+            $table->time('selesai');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateAbsensisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('absensis');
+        Schema::dropIfExists('jams');
     }
 }

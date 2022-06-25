@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absensi;
+use App\Models\Jam;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AbsenController extends Controller
 {
@@ -13,7 +17,8 @@ class AbsenController extends Controller
      */
     public function index()
     {
-        return view('dashboard.absen.index');
+        $data = Siswa::where('name', Auth::user()->name)->first();
+        return view('dashboard.absen.index', compact('data'));
     }
 
     /**
@@ -34,7 +39,15 @@ class AbsenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Absensi::create([
+            'id_siswa' => $request->id_siswa,
+            'tanggal' => $request->tanggal,
+            'ket' => $request->ket,
+            'id_jam' => $request->id_jam,
+        ]);
+
+        return redirect();
     }
 
     /**
@@ -56,7 +69,6 @@ class AbsenController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -68,7 +80,29 @@ class AbsenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $file = $request->foto;
+        $gambar = $file->getClientOriginalName();
+        $file->move(public_path('assets/img/Sk'), $gambar);
+
+        $jam = Jam::all();
+        $now = strtotime(date("h:i:s"));
+
+        foreach ($jam as $jm) {
+            $mulai = strtotime($jm->mulai);
+            $selesai = strtotime($jm->selesai);
+            $p = $now . "/" . $mulai . "/" . $selesai;
+
+            if ($now > $mulai && $now < $selesai) {
+                Absensi::create([
+                    'id_siswa' => $id,
+                    'tanggal' => date(now()),
+                    'ket' => 'izin',
+                    'foto' => $gambar,
+                    'id_jam' => $jm->id,
+                ]);
+            }
+        }
+        return redirect()->back()->with('message', 'Berhasil');
     }
 
     /**

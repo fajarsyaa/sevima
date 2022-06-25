@@ -14,11 +14,21 @@ class SiswaFactory extends Factory
      */
     public function definition()
     {
-        $nama = $this->faker->name();
-        $email = $this->faker->name() . "@gmail.com";
+
         return [
-            'nama' => $nama,
-            'email' => $email,
+            'name' => "fajar syaihu",
+            'agama' => "islam",
+            'tempat_lahir' => "mjk",
+            'tanggal_lahir' => "2003-09-09",
+            'tahun_masuk' => "2003-09-09",
+            'jenis_kelamin' => "lk",
+            'phone' => "23456789",
+            'jurusan' => "RPL",
+            'alamat' => "klgr",
+            'kelas' => "1",
+            'absen' => "1",
+            'nis' => "123456789"
+
         ];
     }
 }
