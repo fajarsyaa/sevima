@@ -7,8 +7,10 @@ use App\Models\Jam;
 use App\Models\Jurusan;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AbsenController extends Controller
 {
@@ -24,7 +26,7 @@ class AbsenController extends Controller
     }
     public function index()
     {
-        $data = Siswa::where('id', Auth::user()->id_siswa)->first();
+        $data = Siswa::where('id', Auth::user()->siswa_id)->first();
         return view('dashboard.absen.index', compact('data'));
     }
 
@@ -48,10 +50,10 @@ class AbsenController extends Controller
     {
 
         Absensi::create([
-            'id_siswa' => $request->id_siswa,
+            'siswa_id' => $request->id_siswa,
             'tanggal' => $request->tanggal,
             'ket' => $request->ket,
-            'id_jam' => $request->id_jam,
+            'jam_id' => $request->id_jam,
         ]);
 
         return redirect();
@@ -76,11 +78,45 @@ class AbsenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($idK, $idJ)
     {
-        $data = Siswa::where('jurusan', 1)->where('kelas', 3)->get();
+        $now = date('Y-m-d');
+        $datas = Siswa::where('jurusan_id', $idJ)->where('kelas_id', $idK)->get();
+        $jam = Jam::all();
+        $absen = DB::table('absensis')
+            ->select('*')
+            ->rightJoin('jams', 'jams.id', '=', 'jam_id')
+            ->where('absensis.tanggal', $now)
+            ->get();
 
-        return view('dashboard.dataAbsen.data', compact('data'));
+        $jam = DB::table('jams')->get();
+
+        $data_absen = null;
+
+
+
+        foreach ($datas as $keys => $values) {
+            foreach ($absen as $keya => $valuea) {
+                if ($valuea->siswa_id == $values->id) {
+                    unset($datas[$keys]);
+                    $data_absen[$values->id] = [
+                        "nama_siswa" => $values->name,
+                    ];
+                    foreach ($jam as $keyj => $valuej) {
+                        if ($valuej->id == $valuea->jam_id) {
+                            $data_absen[$values->id][$valuej->type] = "yes";
+                        } else {
+                            $data_absen[$values->id][$valuej->type] = "no";
+                        }
+                    }
+                }
+            }
+        }
+        // dd($data_absen);
+
+
+        return view('dashboard.dataAbsen.cek', compact('data_absen', 'datas', 'jam'));
+        // return view('dashboard.dataAbsen.data', compact('datas', 'jam'));
     }
 
     /**
@@ -110,15 +146,15 @@ class AbsenController extends Controller
         foreach ($jam as $jm) {
             $mulai = strtotime($jm->mulai);
             $selesai = strtotime($jm->selesai);
-            $p = $now . "/" . $mulai . "/" . $selesai;
+
 
             if ($now > $mulai && $now < $selesai) {
                 Absensi::create([
-                    'id_siswa' => $id,
+                    'siswa_id' => $id,
                     'tanggal' => date(now()),
                     'ket' => 'izin',
                     'foto' => $gambar,
-                    'id_jam' => $jm->id,
+                    'jam_id' => $jm->id,
                 ]);
             }
         }
@@ -134,6 +170,65 @@ class AbsenController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function absenQr(Request $request)
+    {
+        $jam = Jam::all();
+        $now = strtotime(date("h:i:s"));
+        $tanggal = date('Y-m-d');
+        // check id
+        $cekQR = Siswa::where('id', $request->id)->first();
+        if ($cekQR) {
+            // check absen
+            $cekAbsen = Absensi::where('siswa_id', $request->id)->where('tanggal', $tanggal)->first();
+
+            if (isset($cekAbsen->jam_id) == 1) {
+                $data = [
+                    "status" => "gagal",
+                    "pesan" => "Anda sudah absen"
+                ];
+                return $data;
+                exit;
+            } elseif (isset($cekAbsen->jam_id) == 2) {
+                $data = [
+                    "status" => "gagal",
+                    "pesan" => "Anda sudah absen untuk pulang"
+                ];
+                return $data;
+                exit;
+            }
+        } else {
+            // gagal
+            $data = [
+                "status" => "gagal",
+                "pesan" => "QR code tidak valid"
+            ];
+            return $data;
+            exit;
+        }
+
+
+        foreach ($jam as $jm) {
+            $mulai = strtotime($jm->mulai);
+            $selesai = strtotime($jm->selesai);
+
+            if ($now > $mulai && $now < $selesai) {
+                Absensi::create([
+                    'siswa_id' => $request->id,
+                    'tanggal' => date(now()),
+                    'ket' => 'masuk',
+                    'jam_id' => $jm->id,
+                ]);
+            }
+        }
+
+        $data = [
+            "status" => "berhasil",
+            "pesan" => "berhasil absen"
+        ];
+
+        return $data;
     }
 
     function perkelas()

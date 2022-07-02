@@ -10,19 +10,21 @@ class Siswa extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $table = 'siswas';
+    // protected $casts = ['kelas' => 'object'];
 
-    function absen()
+    public function absens()
     {
-        return $this->hasMany(Absensi::class, 'id_siswa', 'id');
+        return $this->hasMany(Absensi::class);
     }
 
-    function jurusan()
+    public function jurusan()
     {
-        return $this->hasOne(Jurusan::class, 'id', 'jurusan');
+        return $this->hasOne(Jurusan::class, 'id', 'jurusan_id');
     }
 
-    function kelas()
+    public function kelas()
     {
-        return $this->hasOne(kelas::class, 'id', 'kelas');
+        return $this->hasOne(Kelas::class, 'id', 'kelas_id');
     }
 }

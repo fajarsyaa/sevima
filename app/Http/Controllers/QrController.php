@@ -21,7 +21,7 @@ class QrController extends Controller
 
     public function index()
     {
-        $data = Siswa::where('id', Auth::user()->id_siswa)->first();
+        $data = Siswa::where('id', Auth::user()->siswa_id)->first();
         $qr = $data->id;
         return  view('dashboard.absen.qr', compact('qr'));
     }

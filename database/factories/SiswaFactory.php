@@ -23,9 +23,9 @@ class SiswaFactory extends Factory
             'tahun_masuk' => "2003-09-09",
             'jenis_kelamin' => "lk",
             'phone' => "23456789",
-            'jurusan' => rand(1, 3),
+            'jurusan_id' => rand(1, 4),
             'alamat' => "klgr",
-            'kelas' => rand(1, 3),
+            'kelas_id' => rand(1, 3),
             'nis' => $this->faker->unique()->numberBetween(100000, 90000000)
 
         ];

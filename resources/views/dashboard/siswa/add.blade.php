@@ -84,7 +84,7 @@
                                 aria-label="Floating label select example">
                                 <option selected>Open this select menu</option>
                                 @foreach ($jur as $san)
-                                    <option value="{{ $san->kode_jurusan }}">{{ $san->nama_jurusan }}</option>
+                                    <option value="{{ $san->id }}">{{ $san->nama_jurusan }}</option>
                                 @endforeach
                             </select>
                         </div>

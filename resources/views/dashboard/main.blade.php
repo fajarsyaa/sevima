@@ -73,13 +73,14 @@
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
-                        data-bs-toggle="dropdown">
+                        data-bs-toggle="dropdown" id="navbarDropdown">
                         <img src="{{ asset('assets/img/fotoProfile/' . Auth::user()->foto) }}" alt="Profile"
                             class="rounded-circle">
                         <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
                     </a><!-- End Profile Iamge Icon -->
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+                        aria-labelledby="navbarDropdown">
                         <li class="dropdown-header">
                             <h6>{{ Auth::user()->name }}</h6>
                             <span>{{ Auth::user()->level }}</span>
@@ -140,8 +141,16 @@
     </main><!-- End #main -->
 
 
+
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.all.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    @stack('qrjs')
 
     <!-- Vendor JS Files -->
     <script src="{{ asset('dashboard/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
@@ -155,36 +164,6 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('dashboard/assets/js/main.js') }}"></script>
-    <script src="https://unpkg.com/html5-qrcode" type="text/javascript">
-        < script src = "https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity = "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin = "anonymous" >
-    </script>
-    <script>
-        function onScanSuccess(decodedText, decodedResult) {
-            // handle the scanned code as you like, for example:
-            console.log(`Code matched = ${decodedText}`, decodedResult);
-        }
-
-        function onScanFailure(error) {
-            // handle scan failure, usually better to ignore and keep scanning.
-            // for example:
-            console.warn(`Code scan error = ${error}`);
-        }
-
-        let html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader", {
-                fps: 10,
-                qrbox: {
-                    width: 250,
-                    height: 250
-                }
-            },
-            /* verbose= */
-            false);
-        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-    </script>
-
 </body>
 
 </html>

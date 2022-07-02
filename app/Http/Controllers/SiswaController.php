@@ -64,22 +64,23 @@ class SiswaController extends Controller
             'tahun_masuk' => date('Y-m-d'),
             'jenis_kelamin' => $request->jenis_kelamin,
             'phone' => $request->phone,
-            'jurusan' => $request->jurusan,
+            'jurusan_id' => $request->jurusan,
             'alamat' => $request->alamat,
-            'kelas' => 1,
+            'kelas_id' => 1,
             'nis' => $request->nis
         ]);
 
         $dt = Siswa::where('id', $Siswa->id)->first();
-        $dw = Jurusan::where('kode_jurusan', $dt->jurusan)->first();
+        $dw = Jurusan::where('id', $dt->jurusan_id)->first();
+
         User::create([
             'name' => $request->name,
-            'email' => 'mistermaqin'. rand(1,1000) . "@gmail.com",
+            'email' => 'mistermaqin' . rand(1, 1000) . "@gmail.com",
             'password' => Hash::make($request->nama),
             'level' => 'siswa',
-            'id_siswa' => $Siswa->id,
-            'id_kelas' => $dt->kelas,
-            'id_jurusan' => $dw->id
+            'siswa_id' => $Siswa->id,
+            'kelas_id' => $dt->kelas,
+            'jurusan_id' => $dw->id
         ]);
 
         return redirect()->back()->with('message', 'berhasil');
@@ -130,13 +131,5 @@ class SiswaController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function search(Request $request)
-    {
-        $siswa = Siswa::where('pegawai_nama', 'like', "%" . $request->search . "%")
-            ->paginate(10);
-
-        return redirect()->back();
     }
 }

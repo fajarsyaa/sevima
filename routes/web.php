@@ -8,6 +8,9 @@ use App\Http\Controllers\QrController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\UsersController;
+use App\Models\coment;
+use App\Models\post;
+use App\Models\Siswa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,12 +33,16 @@ Route::get('/scan', function () {
 })->name('scan');
 
 
+
 Auth::routes();
 // Route::post('/logout/user', [LoginController::class, 'logout'])->name('lgt');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/edit/absen', [App\Http\Controllers\AbsenController::class, 'edit']);
+
+Route::post('/edit/absen', [App\Http\Controllers\AbsenController::class, 'absenQr'])->name('QrcodeScan');
+
 Route::get('/edit/absen/perkelas', [App\Http\Controllers\AbsenController::class, 'perkelas'])->name('perkelas');
+Route::get('/dataAbsen/perkelas/{id_K}/{id_J}', [App\Http\Controllers\AbsenController::class, 'edit']);
 Route::get('/user/serach', [App\Http\Controllers\UsersController::class, 'search'])->name('search');
 
 

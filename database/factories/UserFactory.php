@@ -17,13 +17,13 @@ class UserFactory extends Factory
     {
 
         return [
-            'name' => 'user' . rand(1, 100),
-            'email' => 'user' . rand(1, 100) . '@gmail.com',
+            'name' => 'user' . rand(1, 1000),
+            'email' => 'user' . rand(1, 1000) . rand(1, 1000) . '@gmail.com',
             'password' => Hash::make('user123'),
             'level' => "siswa",
-            'id_kelas' => 1,
-            'id_jurusan' => 1,
-            'id_siswa' => 1,
+            'kelas_id' => rand(1, 3),
+            'jurusan_id' => rand(1, 3),
+            'siswa_id' => $this->faker->unique()->numberBetween(2, 800),
         ];
     }
 

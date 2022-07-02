@@ -2,7 +2,7 @@
 @section('content')
     <h3>data siswa</h3>
     @foreach ($data as $jrs)
-        <a href="{{ route('absen.edit', $kls->kelas) }}" class="col-xxl-4 col-md-6">
+        <a href="{{ url('/dataAbsen/perkelas/' . $kls->id . '/' . $jrs->id . '') }}" class="col-xxl-4 col-md-6">
             <div class="card info-card sales-card">
 
                 <div class="card-body">
@@ -10,7 +10,7 @@
 
                     <div class="d-flex align-items-center">
                         <div class="ps-3">
-
+                            {{ $jrs->nama_jurusan }}
                         </div>
                     </div>
                 </div>

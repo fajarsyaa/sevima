@@ -10,14 +10,15 @@ class Absensi extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $table = 'absensis';
 
-    function jam()
+    public function jam()
     {
-        return $this->hasOne(Jam::class, 'id_jam', 'id');
+        return $this->hasOne(Jam::class, 'jam_id', 'id');
     }
 
-    function siswa()
+    public function siswa()
     {
-        return $this->hasOne(Siswa::class, 'id', 'id_siswa');
+        return $this->belongsTo(Siswa::class, 'id', 'siswa_id');
     }
 }

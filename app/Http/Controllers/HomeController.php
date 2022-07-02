@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $guru = collect(User::where('level', 'guru'));
+        $guru = collect(User::where('level', 'guru')->get());
         $j_guru = count($guru);
 
         $user = collect(User::all());

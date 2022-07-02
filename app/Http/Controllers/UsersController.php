@@ -88,6 +88,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $dataUser = Auth::user();
+        // dd($dataUser->siswa);
         return view('dashboard.profil.profile', compact('dataUser'));
     }
 

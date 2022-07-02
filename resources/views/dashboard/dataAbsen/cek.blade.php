@@ -10,23 +10,37 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Kelas</th>
-                        <th scope="col">Keterangan</th>
-                        {{-- <th scope="col">foto</th> --}}
+                        @foreach ($jam as $j)
+                            <th>{{ $j->type }}</th>
+                        @endforeach
                     </tr>
                 </thead>
                 <tbody>
+
+                    @if ($data_absen != null)
+                        @foreach ($data_absen as $dSiswa)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $dSiswa['nama_siswa'] }}</td>
+                                @foreach ($jam as $j)
+                                    <td>{{ $dSiswa[$j->type] }}</td>
+                                @endforeach
+                            </tr>
+                        @endforeach
+                    @endif
+
                     @foreach ($datas as $dSiswa)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $dSiswa->name }}</td>
-                            <td>{{ $dSiswa->kelas }}</td>
-                            <td>{{ $dSiswa->absens }}</td>
+                            @foreach ($jam as $j)
+                                <td>no</td>
+                            @endforeach
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            <!-- End Table with stripped rows -->
+
 
         </div>
     </div>

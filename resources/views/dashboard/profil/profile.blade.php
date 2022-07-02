@@ -17,10 +17,10 @@
             <div class="card">
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                    <img src="{{ asset('assets/img/fotoProfile/' . Auth::user()->foto) }}" alt="Profile"
+                    <img src="{{ asset('assets/img/fotoProfile/' . $dataUser->foto) }}" alt="Profile"
                         class="rounded-circle" width="150" height="150">
-                    <h4>{{ Auth::user()->name }}</h4>
-                    <h3>{{ Auth::user()->level }}</h3>
+                    <h4>{{ $dataUser->name }}</h4>
+                    <h3>{{ $dataUser->level }}</h3>
                     <div class="social-links mt-2">
                         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -60,37 +60,45 @@
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                                <div class="col-lg-9 col-md-8">{{ Auth::user()->name }}</div>
+                                <div class="col-lg-9 col-md-8">{{ $dataUser->name }}</div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Kelas</div>
-                                <div class="col-lg-9 col-md-8">{{ Auth::user()->siswa->kelas }}</div>
-                            </div>
+                            @if ($dataUser->level == 'siswa')
+                                {{-- <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Kelas</div>
+                                    <div class="col-lg-9 col-md-8">{{ $dataUser->siswa->kelas->kelas }}</div>
+                                </div> --}}
 
-                            <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Jurusan</div>
-                                <div class="col-lg-9 col-md-8">{{ Auth::user()->siswa->jurusan }}</div>
-                            </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Jurusan</div>
+                                    <div class="col-lg-9 col-md-8">{{ $dataUser->siswa->jurusan->nama_jurusan }}</div>
+                                </div>
 
-                            <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Jenis Kelamin</div>
-                                <div class="col-lg-9 col-md-8">{{ Auth::user()->siswa->jenis_kelamin }}</div>
-                            </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Jenis Kelamin</div>
+                                    <div class="col-lg-9 col-md-8">{{ $dataUser->siswa->jenis_kelamin }}</div>
+                                </div>
+                            @endif
+                            @if ($dataUser->level == 'guru')
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">NIP</div>
+                                    <div class="col-lg-9 col-md-8">{{ $dataUser->nip }}</div>
+                                </div>
+                            @endif
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Alamat</div>
-                                <div class="col-lg-9 col-md-8">{{ Auth::user()->alamat }}</div>
+                                <div class="col-lg-9 col-md-8">{{ $dataUser->alamat }}</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Phone</div>
-                                <div class="col-lg-9 col-md-8">{{ Auth::user()->phone }}</div>
+                                <div class="col-lg-9 col-md-8">{{ $dataUser->phone }}</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Email</div>
-                                <div class="col-lg-9 col-md-8">{{ Auth::user()->email }}</div>
+                                <div class="col-lg-9 col-md-8">{{ $dataUser->email }}</div>
                             </div>
 
                         </div>
@@ -98,16 +106,16 @@
                         <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                             <!-- Profile Edit Form -->
-                            <form method="POST" action="{{ route('profile.update', Auth::user()->id) }}"
+                            <form method="POST" action="{{ route('profile.update', $dataUser->id) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row mb-3">
                                     <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <img src="{{ asset('assets/img/fotoProfile/' . Auth::user()->foto) }}"
+                                        <img src="{{ asset('assets/img/fotoProfile/' . $dataUser->foto) }}"
                                             alt="Profile" width="200" height="200">
-                                        <input type="hidden" value="{{ Auth::user()->foto }}">
+                                        <input type="hidden" value="{{ $dataUser->foto }}">
                                         <div class="pt-2">
                                             <input type="file" class="form-control bi bi-upload" name="foto">
                                         </div>
@@ -118,14 +126,14 @@
                                     <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="name" type="text" class="form-control" id="fullName"
-                                            value="{{ Auth::user()->name }}">
+                                            value="{{ $dataUser->name }}">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="alamat" class="col-md-4 col-lg-3 col-form-label">Alamat</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <textarea name="alamat" class="form-control" id="alamat" style="height: 100px">{{ Auth::user()->alamat }}</textarea>
+                                        <textarea name="alamat" class="form-control" id="alamat" style="height: 100px">{{ $dataUser->alamat }}</textarea>
                                     </div>
                                 </div>
 
@@ -133,7 +141,7 @@
                                     <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="phone" type="text" class="form-control" id="Phone"
-                                            value="{{ Auth::user()->phone }}">
+                                            value="{{ $dataUser->phone }}">
                                     </div>
                                 </div>
 
@@ -141,7 +149,7 @@
                                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="email" type="email" class="form-control" id="Email"
-                                            value="{{ Auth::user()->email }}">
+                                            value="{{ $dataUser->email }}">
                                     </div>
                                 </div>
 

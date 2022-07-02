@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\coment;
 use Illuminate\Http\Request;
 
 class TugasController extends Controller
@@ -17,7 +18,8 @@ class TugasController extends Controller
     }
     public function index()
     {
-        return view('dashboard.pilihTugas');
+
+        // return view('dashboard.pilihTugas');
     }
 
     /**
